@@ -11,7 +11,7 @@
 function injectFilename(str, filename) {
   return str
     .replace('%s', filename)
-    .replace('%S', filename.toLocaleUpperCase())
+    .replace('%S', filename.toLocaleUpperCase());
 }
 
 module.exports = function (grunt) {
@@ -40,7 +40,7 @@ module.exports = function (grunt) {
           }
         })
         .map(function (filepath) {
-          var content, l, svg = [];
+          var content, i, l, svg = [];
           // Read file source.
           content = grunt.file.read(filepath);
           content = content.replace(/'/g, "\\'");
@@ -48,9 +48,9 @@ module.exports = function (grunt) {
             content = content.replace(/>\s+</g, "><").trim();
           }
           if (options.splitByLines) {
-            l = Math.ceil(content.length / LINE_LENGTH);
+            l = Math.ceil(content.length / options.lineLength);
             for (i = 0; i < l; i++) {
-              svg.push("'" + content.substr(i * LINE_LENGTH, LINE_LENGTH) + "'");
+              svg.push("'" + content.substr(i * options.lineLength, options.lineLength) + "'");
             }
           } else {
             svg.push("'" + content + "'");
