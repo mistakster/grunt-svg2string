@@ -8,10 +8,19 @@
 
 'use strict';
 
-function injectFilename(str, filename) {
-  return str
-    .replace('%s', filename)
-    .replace('%S', filename.toLocaleUpperCase());
+var path = require('path');
+
+function injectFilename(grunt, template, filepath) {
+
+  var ext = path.extname(filepath);
+  var filename = path.basename(filepath, ext);
+
+  return grunt.template.process(template, {data: {
+    filepath: filepath,
+    filename: filename,
+    capitalized: filename.toLocaleUpperCase(),
+    ext: ext
+  }});
 }
 
 module.exports = function (grunt) {
@@ -22,8 +31,8 @@ module.exports = function (grunt) {
       lineLength: 100,
       splitByLines: true,
       removeSpaces: true,
-      prefix: 'var SVG_%S = ',
-      postfix: ';'
+      prefix: 'var SVG_<%= capitalized %> /* <%= filepath %> <%= filename %> */ = ',
+      postfix: '; /* <%= capitalized %> <%= filename %> <%= filepath %> */'
     });
 
     // Iterate over all specified file groups.
@@ -55,9 +64,9 @@ module.exports = function (grunt) {
           } else {
             svg.push("'" + content + "'");
           }
-          return injectFilename(options.prefix, filepath) +
+          return injectFilename(grunt, options.prefix, filepath) +
             svg.join('+' + grunt.util.linefeed) +
-            injectFilename(options.postfix, filepath);
+            injectFilename(grunt, options.postfix, filepath);
         })
         .join(grunt.util.linefeed);
 
