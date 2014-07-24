@@ -35,7 +35,7 @@ module.exports = function (grunt) {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       lineLength: 117,
-      splitByLines: true,
+      wrapLines: true,
       template: 'var SVG_[%= capitalized %] =\n[%= content %];'
     });
 
@@ -60,7 +60,7 @@ module.exports = function (grunt) {
           content = content.replace(/'/g, "\\'");
           // Remove all unimportant space characters
           content = content.replace(/>\s+</g, "><").trim();
-          if (options.splitByLines) {
+          if (options.wrapLines) {
             l = Math.ceil(content.length / options.lineLength);
             for (i = 0; i < l; i++) {
               svg.push("'" + content.substr(i * options.lineLength, options.lineLength) + "'");

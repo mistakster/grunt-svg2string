@@ -47,7 +47,7 @@ module.exports = function(grunt) {
       },
       split_option: {
         options: {
-          splitByLines: false
+          wrapLines: false
         },
         files: {
           'tmp/split_option.js': ['test/fixtures/elements.svg']
