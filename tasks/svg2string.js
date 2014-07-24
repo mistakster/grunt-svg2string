@@ -31,8 +31,8 @@ module.exports = function (grunt) {
       lineLength: 100,
       splitByLines: true,
       removeSpaces: true,
-      prefix: 'var SVG_<%= capitalized %> /* <%= filepath %> <%= filename %> */ = ',
-      postfix: '; /* <%= capitalized %> <%= filename %> <%= filepath %> */'
+      prefix: 'var SVG_<%= capitalized %> = ',
+      postfix: ';'
     });
 
     // Iterate over all specified file groups.
