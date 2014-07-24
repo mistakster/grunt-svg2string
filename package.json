@@ -1,0 +1,44 @@
+{
+  "name": "grunt-svg2string",
+  "description": "Transform a SVG file to a JavaScript string",
+  "version": "0.1.0",
+  "homepage": "https://github.com/mistakster/grunt-svg2string",
+  "author": {
+    "name": "Vladimir Kuznetsov",
+    "email": "mistakster@gmail.com",
+    "url": "http://noteskeeper.ru"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mistakster/grunt-svg2string.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mistakster/grunt-svg2string/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/mistakster/grunt-svg2string/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin",
+    "inline",
+    "svg"
+  ]
+}
