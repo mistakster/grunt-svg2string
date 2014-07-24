@@ -55,10 +55,18 @@ module.exports = function(grunt) {
       },
       length_option: {
         options: {
-          lineLength: 59
+          lineLength: 62
         },
         files: {
           'tmp/length_option.js': ['test/fixtures/elements.svg']
+        }
+      },
+      negative_length_option: {
+        options: {
+          lineLength: -10
+        },
+        files: {
+          'tmp/negative_length_option.js': ['test/fixtures/elements.svg']
         }
       }
     },

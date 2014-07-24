@@ -33,11 +33,17 @@ module.exports = function (grunt) {
 
   grunt.registerMultiTask('svg2string', 'Transform a SVG file to a JavaScript string', function () {
     // Merge task-specific and/or target-specific options with these defaults.
+    var DEFAULT_LENGTH = 120;
+
     var options = this.options({
-      lineLength: 117,
+      lineLength: DEFAULT_LENGTH,
       wrapLines: true,
       template: 'var SVG_[%= capitalized %] =\n[%= content %];'
     });
+
+    if (options.lineLength <= 3) {
+      options.lineLength = DEFAULT_LENGTH;
+    }
 
     // Iterate over all specified file groups.
     this.files.forEach(function (f) {
@@ -53,7 +59,11 @@ module.exports = function (grunt) {
           }
         })
         .map(function (filepath) {
-          var content, i, l, svg = [];
+          var content, i, l, svg, lineLength;
+
+          svg = [];
+          lineLength = options.lineLength - 3;
+
           // Read file source.
           content = grunt.file.read(filepath);
           // Escape content
@@ -61,9 +71,9 @@ module.exports = function (grunt) {
           // Remove all unimportant space characters
           content = content.replace(/>\s+</g, "><").trim();
           if (options.wrapLines) {
-            l = Math.ceil(content.length / options.lineLength);
+            l = Math.ceil(content.length / lineLength);
             for (i = 0; i < l; i++) {
-              svg.push("'" + content.substr(i * options.lineLength, options.lineLength) + "'");
+              svg.push("'" + content.substr(i * lineLength, lineLength) + "'");
             }
           } else {
             svg.push("'" + content + "'");

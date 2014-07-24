@@ -47,7 +47,7 @@ A string value that is used as a template for JavaScript file. You can use follo
 * `[%= filepath %]` — path and file name of the current file (eg. `test/fixtures/elements.svg`);
 * `[%= filename %]` — name of the current file (eg. `elements`);
 * `[%= capitalized %]` — capitalized name (eg. `ELEMENTS`);
-* `[%= ext %]` — extention of the current file (eg. `svg`).
+* `[%= ext %]` — extension of the current file (eg. `svg`).
  
 Please, find some useful templates below.
 
@@ -63,13 +63,13 @@ App.defaults("App.SVG", {"[%= filename %]": [%= content %]});
 Type: `Boolean`
 Default value: `true`
 
-A boolean value that instucts to wrap long lines or not.
+A boolean value that instructs to wrap long lines or not.
 
 #### options.lineLength
 Type: `Number`
-Default value: `117`
+Default value: `120`
 
-A numerical value that is used as maximum length of the processed content excluding quotes and concatination sign.
+A numerical value that is used as maximum length of the line of the processed content including quotes and concatenation sign.
 
 Please, bear in mind that this option is not applicable if `wrapLines` is `false`.
 
@@ -115,4 +115,6 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+**0.1.1** (24-Jul-2014) Maximum length of the line includes quotes and plus sign now.
+
 **0.1.0** (24-Jul-2014) Initial release

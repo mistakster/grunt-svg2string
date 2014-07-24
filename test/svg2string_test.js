@@ -43,7 +43,7 @@ exports.svg2string = {
 
     var actual = util.normalizelf(grunt.file.read('tmp/default_options.js'));
     var expected = util.normalizelf(grunt.file.read('test/expected/default_options.js'));
-    test.equal(actual, expected, 'should describe what the default behavior is.');
+    test.equal(actual, expected);
 
     test.done();
   },
@@ -52,7 +52,7 @@ exports.svg2string = {
 
     var actual = util.normalizelf(grunt.file.read('tmp/template_option.js'));
     var expected = util.normalizelf(grunt.file.read('test/expected/template_option.js'));
-    test.equal(actual, expected, 'should describe what the template option behavior is.');
+    test.equal(actual, expected);
 
     test.done();
   },
@@ -61,16 +61,22 @@ exports.svg2string = {
 
     var actual = util.normalizelf(grunt.file.read('tmp/split_option.js'));
     var expected = util.normalizelf(grunt.file.read('test/expected/split_option.js'));
-    test.equal(actual, expected, 'should describe what the split by lines option behavior is.');
+    test.equal(actual, expected);
 
     test.done();
   },
   length_option: function(test) {
-    test.expect(1);
+    var expected, actual;
 
-    var actual = util.normalizelf(grunt.file.read('tmp/length_option.js'));
-    var expected = util.normalizelf(grunt.file.read('test/expected/length_option.js'));
-    test.equal(actual, expected, 'should describe what the line length option behavior is.');
+    test.expect(2);
+
+    actual = util.normalizelf(grunt.file.read('tmp/length_option.js'));
+    expected = util.normalizelf(grunt.file.read('test/expected/length_option.js'));
+    test.equal(actual, expected);
+
+    actual = util.normalizelf(grunt.file.read('tmp/negative_length_option.js'));
+    expected = util.normalizelf(grunt.file.read('test/expected/negative_length_option.js'));
+    test.equal(actual, expected);
 
     test.done();
   }
