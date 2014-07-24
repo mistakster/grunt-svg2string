@@ -34,16 +34,31 @@ module.exports = function(grunt) {
         options: {
         },
         files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
+          'tmp/default_options.js': ['test/fixtures/short.svg', 'test/fixtures/elements.svg']
         }
       },
-      custom_options: {
+      template_option: {
         options: {
-          separator: ': ',
-          punctuation: ' !!!'
+          template: 'App.defaults("App.SVG", {[%= filename %]: [%= content %]});'
         },
         files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
+          'tmp/template_option.js': ['test/fixtures/short.svg']
+        }
+      },
+      split_option: {
+        options: {
+          splitByLines: false
+        },
+        files: {
+          'tmp/split_option.js': ['test/fixtures/elements.svg']
+        }
+      },
+      length_option: {
+        options: {
+          lineLength: 59
+        },
+        files: {
+          'tmp/length_option.js': ['test/fixtures/elements.svg']
         }
       }
     },

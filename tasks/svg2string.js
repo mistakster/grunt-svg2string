@@ -10,29 +10,33 @@
 
 var path = require('path');
 
-function injectFilename(grunt, template, filepath) {
+function processOutput(grunt, template, filepath, content) {
 
   var ext = path.extname(filepath);
   var filename = path.basename(filepath, ext);
 
-  return grunt.template.process(template, {data: {
-    filepath: filepath,
-    filename: filename,
-    capitalized: filename.toLocaleUpperCase(),
-    ext: ext
-  }});
+  return grunt.template.process(template, {
+    data: {
+      content: content,
+      filepath: filepath,
+      filename: filename,
+      capitalized: filename.toLocaleUpperCase(),
+      ext: ext
+    },
+    delimiters: 'svg2StringDelimiters'
+  });
 }
 
 module.exports = function (grunt) {
 
+  grunt.template.addDelimiters('svg2StringDelimiters', '[%', '%]');
+
   grunt.registerMultiTask('svg2string', 'Transform a SVG file to a JavaScript string', function () {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      lineLength: 100,
+      lineLength: 117,
       splitByLines: true,
-      removeSpaces: true,
-      prefix: 'var SVG_<%= capitalized %> = ',
-      postfix: ';'
+      template: 'var SVG_[%= capitalized %] =\n[%= content %];'
     });
 
     // Iterate over all specified file groups.
@@ -52,10 +56,10 @@ module.exports = function (grunt) {
           var content, i, l, svg = [];
           // Read file source.
           content = grunt.file.read(filepath);
+          // Escape content
           content = content.replace(/'/g, "\\'");
-          if (options.removeSpaces) {
-            content = content.replace(/>\s+</g, "><").trim();
-          }
+          // Remove all unimportant space characters
+          content = content.replace(/>\s+</g, "><").trim();
           if (options.splitByLines) {
             l = Math.ceil(content.length / options.lineLength);
             for (i = 0; i < l; i++) {
@@ -64,9 +68,8 @@ module.exports = function (grunt) {
           } else {
             svg.push("'" + content + "'");
           }
-          return injectFilename(grunt, options.prefix, filepath) +
-            svg.join('+' + grunt.util.linefeed) +
-            injectFilename(grunt, options.postfix, filepath);
+
+          return processOutput(grunt, options.template, filepath, svg.join('+\n'));
         })
         .join(grunt.util.linefeed);
 

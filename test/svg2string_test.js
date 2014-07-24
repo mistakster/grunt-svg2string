@@ -22,6 +22,17 @@ var grunt = require('grunt');
     test.ifError(value)
 */
 
+var util = {};
+
+// The line feed char for the current system.
+util.linefeed = process.platform === 'win32' ? '\r\n' : '\n';
+
+// Normalize linefeeds in a string.
+util.normalizelf = function(str) {
+  return str.replace(/\r\n|\n/g, util.linefeed);
+};
+
+
 exports.svg2string = {
   setUp: function(done) {
     // setup here if necessary
@@ -30,19 +41,37 @@ exports.svg2string = {
   default_options: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
+    var actual = util.normalizelf(grunt.file.read('tmp/default_options.js'));
+    var expected = util.normalizelf(grunt.file.read('test/expected/default_options.js'));
     test.equal(actual, expected, 'should describe what the default behavior is.');
 
     test.done();
   },
-  custom_options: function(test) {
+  template_option: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
+    var actual = util.normalizelf(grunt.file.read('tmp/template_option.js'));
+    var expected = util.normalizelf(grunt.file.read('test/expected/template_option.js'));
+    test.equal(actual, expected, 'should describe what the template option behavior is.');
 
     test.done();
   },
+  split_option: function(test) {
+    test.expect(1);
+
+    var actual = util.normalizelf(grunt.file.read('tmp/split_option.js'));
+    var expected = util.normalizelf(grunt.file.read('test/expected/split_option.js'));
+    test.equal(actual, expected, 'should describe what the split by lines option behavior is.');
+
+    test.done();
+  },
+  length_option: function(test) {
+    test.expect(1);
+
+    var actual = util.normalizelf(grunt.file.read('tmp/length_option.js'));
+    var expected = util.normalizelf(grunt.file.read('test/expected/length_option.js'));
+    test.equal(actual, expected, 'should describe what the line length option behavior is.');
+
+    test.done();
+  }
 };
