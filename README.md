@@ -46,17 +46,18 @@ A string value that is used as a template for JavaScript file. You can use follo
 * `[%= content %]` — processed content;
 * `[%= filepath %]` — path and file name of the current file (eg. `test/fixtures/elements.svg`);
 * `[%= filename %]` — name of the current file (eg. `elements`);
-* `[%= capitalized %]` — capitalized name (eg. `ELEMENTS`);
+* `[%= sanitized %]` — sanitized name (eg. `icon_set`);
+* `[%= capitalized %]` — sanitized and capitalized name (eg. `ELEMENTS`);
 * `[%= ext %]` — extension of the current file (eg. `svg`).
- 
+
 Please, find some useful templates below.
 
 ```
-App.defaults("App.SVG", {"[%= filename %]": [%= content %]});
+App.defaults("App.SVG", {"[%= sanitized %]": [%= content %]});
 ```
 
 ```
-(App.SVG = App.SVG || {})["[%= filename %]"] = [%= content %];
+(App.SVG = App.SVG || {})["[%= sanitized %]"] = [%= content %];
 ```
 
 #### options.wrapLines

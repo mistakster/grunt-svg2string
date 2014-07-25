@@ -1,0 +1,1 @@
+/* very!Strange()file_name--- // very_Strange_file_name // VERY_STRANGE_FILE_NAME */

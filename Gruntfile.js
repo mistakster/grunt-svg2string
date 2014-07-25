@@ -68,6 +68,14 @@ module.exports = function(grunt) {
         files: {
           'tmp/negative_length_option.js': ['test/fixtures/elements.svg']
         }
+      },
+      sanitize: {
+        options: {
+          template: '/* [%= filename %] // [%= sanitized %] // [%= capitalized %] */'
+        },
+        files: {
+          'tmp/sanitize.js': 'test/fixtures/very!Strange()file_name---.svg'
+        }
       }
     },
 

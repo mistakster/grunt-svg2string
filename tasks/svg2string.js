@@ -14,13 +14,18 @@ function processOutput(grunt, template, filepath, content) {
 
   var ext = path.extname(filepath);
   var filename = path.basename(filepath, ext);
+  var sanitized = filename
+    .replace(/[^0-9a-z]+/gi, ' ')
+    .trim()
+    .replace(/\s+/g, '_');
 
   return grunt.template.process(template, {
     data: {
       content: content,
       filepath: filepath,
       filename: filename,
-      capitalized: filename.toLocaleUpperCase(),
+      sanitized: sanitized,
+      capitalized: sanitized.toLocaleUpperCase(),
       ext: ext
     },
     delimiters: 'svg2StringDelimiters'

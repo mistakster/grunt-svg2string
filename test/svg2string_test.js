@@ -79,5 +79,14 @@ exports.svg2string = {
     test.equal(actual, expected);
 
     test.done();
+  },
+  sanitize: function (test) {
+    test.expect(1);
+
+    var actual = util.normalizelf(grunt.file.read('tmp/sanitize.js'));
+    var expected = util.normalizelf(grunt.file.read('test/expected/sanitize.js'));
+    test.equal(actual, expected);
+
+    test.done();
   }
 };
