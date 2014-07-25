@@ -184,6 +184,7 @@ Output file **elements.js**
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-**0.1.1** (24-Jul-2014) Maximum length of the line includes quotes and plus sign now.
 
-**0.1.0** (24-Jul-2014) Initial release
+* 0.1.2 (25-Jul-2014): Introduce sanitized filename in the templates.
+* 0.1.1 (24-Jul-2014): Maximum length of the line includes quotes and plus sign now.
+* 0.1.0 (24-Jul-2014): Initial release
