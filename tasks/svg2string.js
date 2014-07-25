@@ -1,5 +1,5 @@
 /*
- * grunt-svg2string
+ * grunt-svg2string - Transforms a SVG file into a JavaScript string
  * https://github.com/mistakster/grunt-svg2string
  *
  * Copyright (c) 2014 Vladimir Kuznetsov
@@ -36,7 +36,7 @@ module.exports = function (grunt) {
 
   grunt.template.addDelimiters('svg2StringDelimiters', '[%', '%]');
 
-  grunt.registerMultiTask('svg2string', 'Transform a SVG file to a JavaScript string', function () {
+  grunt.registerMultiTask('svg2string', 'Transforms a SVG file into a JavaScript string', function () {
     // Merge task-specific and/or target-specific options with these defaults.
     var DEFAULT_LENGTH = 120;
 
