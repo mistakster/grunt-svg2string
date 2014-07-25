@@ -78,7 +78,7 @@ Please, bear in mind that this option is not applicable if `wrapLines` is `false
 
 Source files:
 
-**navigation.svg**
+**icon-set.svg**
 
 ```xml
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
@@ -106,7 +106,7 @@ Source files:
 </svg>
 ```
 
-**icon-set.svg**
+**navigation.svg**
 
 ```xml
 <svg xmlns="http://www.w3.org/2000/svg">
