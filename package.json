@@ -1,6 +1,6 @@
 {
   "name": "grunt-svg2string",
-  "description": "Transform a SVG file to a JavaScript string",
+  "description": "Transforms a SVG file into a JavaScript string",
   "version": "0.1.2",
   "homepage": "https://github.com/mistakster/grunt-svg2string",
   "author": {
