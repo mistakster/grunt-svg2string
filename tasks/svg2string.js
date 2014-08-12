@@ -74,7 +74,10 @@ module.exports = function (grunt) {
           // Escape content
           content = content.replace(/'/g, "\\'");
           // Remove all unimportant space characters
-          content = content.replace(/>\s+</g, "><").trim();
+          content = content
+            .replace(/\s+/g, " ")
+            .replace(/>\s+</g, "><")
+            .trim();
           if (options.wrapLines) {
             l = Math.ceil(content.length / lineLength);
             for (i = 0; i < l; i++) {

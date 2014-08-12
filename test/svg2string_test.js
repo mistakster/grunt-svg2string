@@ -88,5 +88,14 @@ exports.svg2string = {
     test.equal(actual, expected);
 
     test.done();
+  },
+  newline: function (test) {
+    test.expect(1);
+
+    var actual = util.normalizelf(grunt.file.read('tmp/new_line.js'));
+    var expected = util.normalizelf(grunt.file.read('test/expected/new_line.js'));
+    test.equal(actual, expected);
+
+    test.done();
   }
 };

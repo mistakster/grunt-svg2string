@@ -31,8 +31,7 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     svg2string: {
       default_options: {
-        options: {
-        },
+        options: {},
         files: {
           'tmp/default_options.js': ['test/fixtures/short.svg', 'test/fixtures/elements.svg']
         }
@@ -75,6 +74,12 @@ module.exports = function(grunt) {
         },
         files: {
           'tmp/sanitize.js': 'test/fixtures/very!Strange()file_name---.svg'
+        }
+      },
+      new_line: {
+        options: {},
+        files: {
+          'tmp/new_line.js': 'test/fixtures/new_line.svg'
         }
       }
     },
