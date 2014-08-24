@@ -10,23 +10,16 @@
 
 var path = require('path');
 
-function processOutput(grunt, template, filepath, content) {
-
-  var ext = path.extname(filepath);
-  var filename = path.basename(filepath, ext);
-  var sanitized = filename
-    .replace(/[^0-9a-z]+/gi, ' ')
-    .trim()
-    .replace(/\s+/g, '_');
+function processOutput(grunt, template, fileObject, content) {
 
   return grunt.template.process(template, {
     data: {
       content: content,
-      filepath: filepath,
-      filename: filename,
-      sanitized: sanitized,
-      capitalized: sanitized.toLocaleUpperCase(),
-      ext: ext
+      filepath: fileObject.filepath,
+      filename: fileObject.filename,
+      sanitized: fileObject.sanitized,
+      capitalized: fileObject.capitalized,
+      ext: fileObject.ext
     },
     delimiters: 'svg2StringDelimiters'
   });
@@ -64,15 +57,30 @@ module.exports = function (grunt) {
           }
         })
         .map(function (filepath) {
+          var ext = path.extname(filepath);
+          var filename = path.basename(filepath, ext);
+          var sanitized = filename
+            .replace(/[^0-9a-z]+/gi, ' ')
+            .trim()
+            .replace(/\s+/g, '_');
+
+          return {
+            content: grunt.file.read(filepath),
+            filepath: filepath,
+            filename: filename,
+            sanitized: sanitized,
+            capitalized: sanitized.toLocaleUpperCase(),
+            ext: ext
+          };
+        })
+        .map(function (fileObject) {
           var content, i, l, svg, lineLength;
 
           svg = [];
           lineLength = options.lineLength - 3;
 
-          // Read file source.
-          content = grunt.file.read(filepath);
           // Escape content
-          content = content.replace(/'/g, "\\'");
+          content = fileObject.content.replace(/'/g, "\\'");
           // Remove all unimportant space characters
           content = content
             .replace(/\s+/g, " ")
@@ -87,7 +95,7 @@ module.exports = function (grunt) {
             svg.push("'" + content + "'");
           }
 
-          return processOutput(grunt, options.template, filepath, svg.join('+\n'));
+          return processOutput(grunt, options.template, fileObject, svg.join('+\n'));
         })
         .join(grunt.util.linefeed);
 
