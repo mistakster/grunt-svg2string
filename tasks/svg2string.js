@@ -86,7 +86,7 @@ module.exports = function (grunt) {
 
             var symbolId = sanitizeString(options.symbols + '_' + fileObject.sanitized);
             content = content.replace(/^[\s\S]*<svg[^>]*(viewBox="[^"]*")[^>]*>/i, '<symbol id="' + symbolId + '" $1>');
-            content = content.replace(/<\/svg>/i, '</sybmol>');
+            content = content.replace(/<\/svg>/i, '</symbol>');
 
             fileObject.content = content;
           }
