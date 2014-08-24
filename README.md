@@ -193,6 +193,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 0.1.5 (24-Aug-2014): Fix wrong code
 * 0.1.4 (24-Aug-2014): Add option to convert set of SVG files into symbols.
 * 0.1.3 (12-Aug-2014): Replace multiple continuous space characters with one space.
 * 0.1.2 (25-Jul-2014): Introduce sanitized filename in the templates.
