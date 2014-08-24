@@ -74,6 +74,14 @@ A numerical value that is used as maximum length of the line of the processed co
 
 Please, bear in mind that this option is not applicable if `wrapLines` is `false`.
 
+#### options.symbols
+Type: `String`
+Default value: none
+
+A string value that is used as name for group of icons represented as symbols.
+
+All matched SVG files converted to `<symbol>` and joined together into one SVG file. Next, this file processed as usual.
+
 ### Usage Examples
 
 Source files:
@@ -185,6 +193,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 0.1.4 (24-Aug-2014): Add option to convert set of SVG files into symbols.
 * 0.1.3 (12-Aug-2014): Replace multiple continuous space characters with one space.
 * 0.1.2 (25-Jul-2014): Introduce sanitized filename in the templates.
 * 0.1.1 (24-Jul-2014): Maximum length of the line includes quotes and plus sign now.
