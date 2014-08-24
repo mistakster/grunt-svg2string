@@ -81,6 +81,14 @@ module.exports = function(grunt) {
         files: {
           'tmp/new_line.js': 'test/fixtures/new_line.svg'
         }
+      },
+      symbols: {
+        options: {
+          symbols: 'symbols'
+        },
+        files: {
+          'tmp/symbols.js': 'test/fixtures/icons/*.svg'
+        }
       }
     },
 

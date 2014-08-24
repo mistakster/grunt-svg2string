@@ -97,5 +97,14 @@ exports.svg2string = {
     test.equal(actual, expected);
 
     test.done();
+  },
+  symbols: function (test) {
+    test.expect(1);
+
+    var actual = util.normalizelf(grunt.file.read('tmp/symbols.js'));
+    var expected = util.normalizelf(grunt.file.read('test/expected/symbols_option.js'));
+    test.equal(actual, expected);
+
+    test.done();
   }
 };

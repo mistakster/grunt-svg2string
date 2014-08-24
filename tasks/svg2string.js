@@ -10,6 +10,15 @@
 
 var path = require('path');
 
+
+function sanitizeString(str) {
+  return str.replace(/[^0-9a-z]+/gi, ' ')
+    .trim()
+    .replace(/\s+/g, '_');
+}
+
+
+
 function processOutput(grunt, template, fileObject, content) {
 
   return grunt.template.process(template, {
@@ -59,10 +68,7 @@ module.exports = function (grunt) {
         .map(function (filepath) {
           var ext = path.extname(filepath);
           var filename = path.basename(filepath, ext);
-          var sanitized = filename
-            .replace(/[^0-9a-z]+/gi, ' ')
-            .trim()
-            .replace(/\s+/g, '_');
+          var sanitized = sanitizeString(filename);
 
           return {
             content: grunt.file.read(filepath),
@@ -72,6 +78,19 @@ module.exports = function (grunt) {
             capitalized: sanitized.toLocaleUpperCase(),
             ext: ext
           };
+        })
+        .map(function (fileObject) {
+          var content;
+          if (options.symbols) {
+            content = fileObject.content;
+
+            var symbolId = sanitizeString(options.symbols + '_' + fileObject.sanitized);
+            content = content.replace(/^[\s\S]*<svg[^>]*(viewBox="[^"]*")[^>]*>/i, '<symbol id="' + symbolId + '" $1>');
+            content = content.replace(/<\/svg>/i, '</sybmol>');
+
+            fileObject.content = content;
+          }
+          return fileObject;
         })
         .map(function (fileObject) {
           var content, i, l, svg, lineLength;
@@ -95,9 +114,33 @@ module.exports = function (grunt) {
             svg.push("'" + content + "'");
           }
 
-          return processOutput(grunt, options.template, fileObject, svg.join('+\n'));
-        })
-        .join(grunt.util.linefeed);
+          svg = svg.join('+\n');
+
+          return options.symbols ? svg :
+            processOutput(grunt, options.template, fileObject, svg);
+        });
+
+      if (options.symbols) {
+        src = (function (lines) {
+          var s = sanitizeString(options.symbols);
+
+          lines.unshift('\'<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display:none">\'');
+          lines.push('\'</svg>\'');
+
+          return processOutput(
+            grunt,
+            options.template,
+            {
+              sanitized: s,
+              capitalized: s.toLocaleUpperCase()
+            },
+
+            src.join('+' + grunt.util.linefeed));
+
+        }(src));
+      } else {
+        src = src.join(grunt.util.linefeed);
+      }
 
       // Write the destination file.
       grunt.file.write(f.dest, src);
