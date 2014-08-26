@@ -5,6 +5,6 @@
 	 viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
 abc<path d="M15,12l-5-5l-5,5l1,1l4-4l4,4L15,12z"/>
 
-    123  <path d="M15,12l-5-5l-5,5l1,1l4-4l4,4L15,12z"/>
-    <!-- test -->
+    123  <path d="M15,12l-5-5l-5,5l1,1l4-4l4,4L15,12z"><!-- test --></path>
+
 </svg>
