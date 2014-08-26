@@ -28,6 +28,7 @@
     "test": "grunt test"
   },
   "dependencies": {
+    "svgo": "^0.4.5",
     "xml2js": "^0.4.4"
   },
   "devDependencies": {
