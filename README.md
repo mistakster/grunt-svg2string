@@ -131,13 +131,15 @@ In this example, the default options are used transform two SVG files into the J
 ```js
 grunt.initConfig({
   svg2string: {
-    files: {
-      'assets/_/js/elements.js': [
-        'assets/images/icon-set.svg',
-        'assets/images/navigation.svg'
-      ],
-    },
-  },
+    elements: {
+      files: {
+        'assets/_/js/elements.js': [
+          'assets/images/icon-set.svg',
+          'assets/images/navigation.svg'
+        ]
+      }
+    }
+  }
 });
 ```
 
@@ -167,17 +169,19 @@ In this example, we create custom JavaScript file out of two SVG files using tem
 ```js
 grunt.initConfig({
   svg2string: {
-    options: {
-      template: '(App.SVG = App.SVG || {})["[%= filename %]"] = [%= content %];',
-      wrapLines: false
-    },
-    files: {
-      'assets/_/js/elements.js': [
-        'assets/images/icon-set.svg',
-        'assets/images/navigation.svg'
-      ],
-    },
-  },
+    elements: {
+      options: {
+        template: '(App.SVG = App.SVG || {})["[%= filename %]"] = [%= content %];',
+        wrapLines: false
+      },
+      files: {
+        'assets/_/js/elements.js': [
+          'assets/images/icon-set.svg',
+          'assets/images/navigation.svg'
+        ]
+      }
+    }
+  }
 });
 ```
 
@@ -193,6 +197,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 0.1.6 (04-Oct-2014): Fix samples in the documentation
 * 0.1.5 (24-Aug-2014): Fix wrong code
 * 0.1.4 (24-Aug-2014): Add option to convert set of SVG files into symbols.
 * 0.1.3 (12-Aug-2014): Replace multiple continuous space characters with one space.
