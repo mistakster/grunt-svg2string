@@ -197,6 +197,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 0.2.1 (30-Nov-2016): Update Grunt and other modules
 * 0.1.6 (04-Oct-2014): Fix samples in the documentation
 * 0.1.5 (24-Aug-2014): Fix wrong code
 * 0.1.4 (24-Aug-2014): Add option to convert set of SVG files into symbols.
